@@ -23,6 +23,10 @@ export default {
     title: {
       type: String,
       required: true
+    },
+    server_url: {
+      type: String,
+      required: true
     }
   },
   data() {
@@ -37,7 +41,7 @@ export default {
     async updateRecipes() {
       try {
         const response = await this.axios.get(
-          "http://127.0.0.1:3000/recipes"
+          this.$root.store.server_domain + this.server_url,
         );
 
         // console.log(response);

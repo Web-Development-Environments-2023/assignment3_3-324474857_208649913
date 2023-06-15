@@ -1,0 +1,2 @@
+* Consider adding get method for /recipes/watched to show user's last 3 vs Save locally 3 last and start from 0
+* Unable to get user_id from user's req.session (cookie)

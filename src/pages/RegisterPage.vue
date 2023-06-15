@@ -183,7 +183,7 @@ export default {
       try {
         const response = await this.axios.post(
           
-          "http://127.0.0.1:3000/Register",
+          this.$root.store.server_domain + "/Register",
 
           {
             username: this.form.username,

@@ -95,7 +95,7 @@ export default {
       try {
         
         const response = await this.axios.post(
-          "http://127.0.0.1:3000/Login",
+          this.$root.store.server_domain + "/Login",
           {
             username: this.form.username,
             password: this.form.password

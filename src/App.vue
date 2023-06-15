@@ -3,6 +3,7 @@
     <div id="nav">
       <router-link class="nav_btn" :to="{ name: 'main' }">Main</router-link>
       <router-link class="nav_btn" :to="{ name: 'search' }">Search</router-link>
+      <router-link class="nav_btn" :to="{ name: 'about' }">About</router-link>
       <span v-if="!$root.store.username">
         Hello guest
         <router-link class="nav_btn" :to="{ name: 'register' }">Register</router-link>
