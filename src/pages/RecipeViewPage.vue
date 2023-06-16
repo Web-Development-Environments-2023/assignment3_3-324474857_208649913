@@ -5,12 +5,20 @@
         <h1>{{ recipe.title }}</h1>
         <img :src="recipe.image" class="center" />
       </div>
+      <div>
+        <i v-if="recipe.watched" class="bi bi-eye-fill" style="font-size:20px" ></i>
+        <i v-if="!recipe.watched"  class="bi bi-eye" style="font-size:20px"></i>
+        <img v-if="recipe.vegan" :src="vegan" alt="Vegan Icon" width="35px" />
+        <img v-if="recipe.vegetarian" :src="vegetarian" alt="Vegan Icon" width="35px" />
+        <img v-if="recipe.glutenFree" :src="glutenFree" alt="Vegan Icon" width="30px" />
+      </div>
       <div class="recipe-body">
         <div class="wrapper">
           <div class="wrapped">
             <div class="mb-3">
-              <div><b>Ready in {{ recipe.readyInMinutes }} minutes</b></div>
-              <div><b>Likes: {{ recipe.aggregateLikes }} likes</b></div>
+              <div><b>Ready in:</b> {{ recipe.readyInMinutes }} minutes</div>
+              <div><b>Likes:</b> {{ recipe.popularity }} likes</div>
+              <div><b>Serving:</b> {{ recipe.servings }}</div>
             </div>
             <b>Ingredients:</b>
             <ul>
@@ -23,16 +31,12 @@
             </ul>
           </div>
           <div class="wrapped">
-            <b>Instructions:</b>
-            {{ recipe.instructions }}
+            <b>Instructions</b>
+            <div v-html="recipe.instructions"></div>
+
           </div>
         </div>
       </div>
-      <!-- <pre>
-      {{ $route.params }}
-      {{ recipe }}
-    </pre
-      > -->
     </div>
   </div>
 </template>
@@ -41,15 +45,15 @@
 export default {
   data() {
     return {
-      recipe: null
+      recipe: null,
+      vegan: require('@/assets/vegan_icon.png'),
+      vegetarian: require('@/assets/vegetarian_icon.png'),
+      glutenFree: require('@/assets/gluten_free_icon.png'),
     };
   },
-
   async created() {
     try {
       let response;
-      // response = this.$route.params.response;
-
       try {
         response = await this.axios.get(
           `${this.$root.store.server_domain}/recipes/${this.$route.params.recipeId}`
@@ -68,7 +72,11 @@ export default {
         popularity,
         readyInMinutes,
         image,
-        title
+        title,
+        vegan,
+        vegetarian,
+        glutenFree,
+        servings
       } = response.data
 
       let _recipe = {
@@ -77,7 +85,11 @@ export default {
         popularity,
         readyInMinutes,
         image,
-        title
+        title,
+        vegan,
+        vegetarian,
+        glutenFree,
+        servings
       };
 
       this.recipe = _recipe;
