@@ -6,7 +6,7 @@
     {{ !$root.store.username }}
     <RecipePreviewList
       title="Last Viewed Recipes"
-      server_url="/recipes"
+      server_url="/recipes/watched"
       :class="{
         RandomRecipes: true,
         blur: !$root.store.username,

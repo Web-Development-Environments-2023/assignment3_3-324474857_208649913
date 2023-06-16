@@ -42,6 +42,7 @@ export default {
       try {
         const response = await this.axios.get(
           this.$root.store.server_domain + this.server_url,
+          { withCredentials: true }
         );
 
         // console.log(response);

@@ -184,7 +184,7 @@ export default {
         const response = await this.axios.post(
           
           this.$root.store.server_domain + "/Register",
-
+          { withCredentials: true },
           {
             username: this.form.username,
             password: this.form.password
