@@ -52,10 +52,7 @@ export default {
 
       try {
         response = await this.axios.get(
-          this.$root.store.server_domain + "/recipes/info",
-          {
-            params: { recipeId: this.$route.params.recipeId }
-          }
+          `${this.$root.store.server_domain}/recipes/${this.$route.params.recipeId}`
         );
         console.log(response.data)
         if (response.status !== 200) this.$router.replace("/NotFound");
