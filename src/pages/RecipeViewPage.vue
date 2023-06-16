@@ -9,10 +9,10 @@
         <div class="wrapper">
           <div class="wrapped">
             <div class="mb-3">
-              <div>Ready in {{ recipe.readyInMinutes }} minutes</div>
-              <div>Likes: {{ recipe.aggregateLikes }} likes</div>
+              <div><b>Ready in {{ recipe.readyInMinutes }} minutes</b></div>
+              <div><b>Likes: {{ recipe.aggregateLikes }} likes</b></div>
             </div>
-            Ingredients:
+            <b>Ingredients:</b>
             <ul>
               <li
                 v-for="(r, index) in recipe.extendedIngredients"
@@ -23,12 +23,8 @@
             </ul>
           </div>
           <div class="wrapped">
-            Instructions:
-            <ol>
-              <li v-for="s in recipe._instructions" :key="s.number">
-                {{ s.step }}
-              </li>
-            </ol>
+            <b>Instructions:</b>
+            {{ recipe.instructions }}
           </div>
         </div>
       </div>
@@ -48,6 +44,7 @@ export default {
       recipe: null
     };
   },
+
   async created() {
     try {
       let response;
@@ -55,14 +52,12 @@ export default {
 
       try {
         response = await this.axios.get(
-          // "https://test-for-3-2.herokuapp.com/recipes/info",
           this.$root.store.server_domain + "/recipes/info",
           {
-            params: { id: this.$route.params.recipeId }
+            params: { recipeId: this.$route.params.recipeId }
           }
         );
-
-        // console.log("response.status", response.status);
+        console.log(response.data)
         if (response.status !== 200) this.$router.replace("/NotFound");
       } catch (error) {
         console.log("error.response.status", error.response.status);
@@ -71,28 +66,18 @@ export default {
       }
 
       let {
-        analyzedInstructions,
         instructions,
         extendedIngredients,
-        aggregateLikes,
+        popularity,
         readyInMinutes,
         image,
         title
-      } = response.data.recipe;
-
-      let _instructions = analyzedInstructions
-        .map((fstep) => {
-          fstep.steps[0].step = fstep.name + fstep.steps[0].step;
-          return fstep.steps;
-        })
-        .reduce((a, b) => [...a, ...b], []);
+      } = response.data
 
       let _recipe = {
         instructions,
-        _instructions,
-        analyzedInstructions,
         extendedIngredients,
-        aggregateLikes,
+        popularity,
         readyInMinutes,
         image,
         title
@@ -102,8 +87,8 @@ export default {
     } catch (error) {
       console.log(error);
     }
-  }
-};
+  },
+}
 </script>
 
 <style scoped>
