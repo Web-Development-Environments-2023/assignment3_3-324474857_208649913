@@ -17,6 +17,7 @@
       <div class="data">
         <i v-if="recipe.watched" class="bi bi-eye-fill" style="font-size:20px" ></i>
         <i v-if="!recipe.watched"  class="bi bi-eye" style="font-size:20px"></i>
+        <FavoriteStar :recipeId="recipe.id" :favorited="recipe.favorite"/>
         <img v-if="recipe.vegan" :src="vegan" alt="Vegan Icon" width="35px" />
         <img v-if="recipe.vegetarian" :src="vegetarian" alt="Vegan Icon" width="35px" />
         <img v-if="recipe.glutenFree" :src="glutenFree" alt="Vegan Icon" width="30px" />
@@ -34,8 +35,10 @@
 </template>
 
 <script>
+import FavoriteStar from './FavoriteStar.vue';
 
 export default {
+
   mounted() {
     this.axios.get(this.recipe.image).then((i) => {
       this.image_load = true;
@@ -47,7 +50,23 @@ export default {
       vegan: require('@/assets/vegan_icon.png'),
       vegetarian: require('@/assets/vegetarian_icon.png'),
       glutenFree: require('@/assets/gluten_free_icon.png'),
+      marked:false
     };
+  },
+  methods:{
+    async markAsFavorite(recipeId){
+      try{
+        const response = await this.axios.post( this.$root.store.server_domain + '/users/favorites', {recipeId:recipeId},
+          { withCredentials: true }
+        );
+        this.marked = true;
+
+      }
+      catch(error){
+        console.log(error);
+      }
+      
+    }
   },
   props: {
     recipe: {
@@ -55,6 +74,9 @@ export default {
       required: true,
     },
   },
+  components:{
+    FavoriteStar
+  }
 };
 </script>
 

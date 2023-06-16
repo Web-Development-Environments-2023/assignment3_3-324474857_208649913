@@ -7,6 +7,7 @@
       </div>
       <div>
         <i v-if="recipe.watched" class="bi bi-eye-fill" style="font-size:20px" ></i>
+        <FavoriteStar :favorited="recipe.favorite" :recipeId="recipe.id"></FavoriteStar>
         <i v-if="!recipe.watched"  class="bi bi-eye" style="font-size:20px"></i>
         <img v-if="recipe.vegan" :src="vegan" alt="Vegan Icon" width="35px" />
         <img v-if="recipe.vegetarian" :src="vegetarian" alt="Vegan Icon" width="35px" />
@@ -42,7 +43,9 @@
 </template>
 
 <script>
+ import FavoriteStar from '../components/FavoriteStar.vue';
 export default {
+  
   data() {
     return {
       recipe: null,
@@ -97,7 +100,9 @@ export default {
     } catch (error) {
       console.log(error);
     }
-  },
+  },components:{
+    FavoriteStar
+  }
 }
 </script>
 
