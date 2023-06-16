@@ -23,6 +23,10 @@ export default {
     title: {
       type: String,
       required: true
+    },
+    server_url: {
+      type: String,
+      required: true
     }
   },
   data() {
@@ -37,15 +41,15 @@ export default {
     async updateRecipes() {
       try {
         const response = await this.axios.get(
-          this.$root.store.server_domain + "/recipes/random",
-          // "https://test-for-3-2.herokuapp.com/recipes/random"
+          this.$root.store.server_domain + this.server_url,
         );
 
         // console.log(response);
-        const recipes = response.data.recipes;
+        const recipes = response.data;
         this.recipes = [];
         this.recipes.push(...recipes);
-        // console.log(this.recipes);
+        console.log(recipes)
+        console.log(this.recipes);
       } catch (error) {
         console.log(error);
       }

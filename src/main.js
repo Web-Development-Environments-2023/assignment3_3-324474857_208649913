@@ -13,6 +13,8 @@ const router = new VueRouter({
 import Vuelidate from "vuelidate";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 import {
   FormGroupPlugin,
   FormPlugin,
@@ -67,7 +69,10 @@ Vue.use(VueAxios, axios);
 Vue.config.productionTip = false;
 
 const shared_data = {
+  server_domain: "http://localhost:3000",
+  // server_domain: "http://10.0.0.17:80",
   username: localStorage.username,
+  // TODO: add last searched recipes for users 
   login(username) {
     localStorage.setItem("username", username);
     this.username = username;
@@ -81,6 +86,9 @@ const shared_data = {
 };
 console.log(shared_data);
 // Vue.prototype.$root.store = shared_data;
+Vue.prototype.$root = {
+  store: shared_data,
+};
 
 new Vue({
   router,
@@ -89,6 +97,9 @@ new Vue({
       store: shared_data,
     };
   },
+  // beforeCreate() {
+  //   Vue.prototype.$root.store = shared_data;
+  // },
   methods: {
     toast(title, content, variant = null, append = false) {
       this.$bvToast.toast(`${content}`, {

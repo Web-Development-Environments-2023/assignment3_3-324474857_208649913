@@ -1,9 +1,5 @@
 <template>
-  <router-link
-    :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
-    class="recipe-preview"
-  >
-    <div class="recipe-body">
+  <!-- <div class="recipe-body">
       <img v-if="image_load" :src="recipe.image" class="recipe-image" />
     </div>
     <div class="recipe-footer">
@@ -14,11 +10,42 @@
         <li>{{ recipe.readyInMinutes }} minutes</li>
         <li>{{ recipe.aggregateLikes }} likes</li>
       </ul>
-    </div>
-  </router-link>
+    </div> -->
+  <div>
+    <b-card
+      v-if="image_load"
+      :title="recipe.title"
+      :img-src="recipe.image"
+      img-alt="Image"
+      img-top
+      tag="article"
+      style="max-width: 20rem;"
+      class="mb-2"
+    >
+      <b-card-text> Ready in {{ recipe.readyInMinutes }} minutes </b-card-text>
+      <b-card-text> Popularity: {{ recipe.popularity }} likes </b-card-text>
+
+      <div class="data">
+        <i v-if="recipe.watched" class="bi bi-eye-fill" style="font-size:20px" ></i>
+        <i v-if="!recipe.watched"  class="bi bi-eye" style="font-size:20px"></i>
+        <img v-if="recipe.vegan" :src="vegan" alt="Vegan Icon" width="35px" />
+        <img v-if="recipe.vegetarian" :src="vegetarian" alt="Vegan Icon" width="35px" />
+        <img v-if="recipe.glutenFree" :src="glutenFree" alt="Vegan Icon" width="30px" />
+      </div>
+      <router-link
+        :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
+        class="recipe-preview"
+      >
+        <div class="buttonWrapper">
+        <b-button  id="watchBtn" variant="primary">Watch full recipe</b-button>
+      </div>
+      </router-link>
+    </b-card>
+  </div>
 </template>
 
 <script>
+
 export default {
   mounted() {
     this.axios.get(this.recipe.image).then((i) => {
@@ -27,15 +54,17 @@ export default {
   },
   data() {
     return {
-      image_load: false
+      image_load: false,
+      vegan: require('@/assets/vegan_icon.png'),
+      vegetarian: require('@/assets/vegetarian_icon.png'),
+      glutenFree: require('@/assets/gluten_free_icon.png'),
     };
   },
   props: {
     recipe: {
       type: Object,
-      required: true
-    }
-
+      required: true,
+    },
     // id: {
     //   type: Number,
     //   required: true
@@ -59,7 +88,7 @@ export default {
     //     return undefined;
     //   }
     // }
-  }
+  },
 };
 </script>
 
@@ -138,4 +167,14 @@ export default {
   display: table-cell;
   text-align: center;
 }
+
+.buttonWrapper{
+  width: 100%;
+  display: flex;
+}
+
+#watchBtn{
+  margin: auto;
+}
+
 </style>

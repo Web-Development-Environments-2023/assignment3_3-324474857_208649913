@@ -1,16 +1,21 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link :to="{ name: 'main' }">Vue Recipes</router-link>|
-      <router-link :to="{ name: 'search' }">Search</router-link>|
-      {{ !$root.store.username }}
+      <router-link class="nav_btn" :to="{ name: 'main' }">Main</router-link>
+      <router-link class="nav_btn" :to="{ name: 'search' }">Search</router-link>
+      <router-link class="nav_btn" :to="{ name: 'about' }">About</router-link>
       <span v-if="!$root.store.username">
-        Guest:
-        <router-link :to="{ name: 'register' }">Register</router-link>|
-        <router-link :to="{ name: 'login' }">Login</router-link>|
+        Hello guest
+        <router-link class="nav_btn" :to="{ name: 'register' }">Register</router-link>
+        <router-link class="nav_btn" :to="{ name: 'login' }">Login</router-link>
       </span>
       <span v-else>
-        {{ $root.store.username }}: <button @click="Logout">Logout</button>|
+        <select v-model="selectedOption" @change="navigateToOption">
+          <option value="option1">My favorite recipes</option>
+          <option value="option2">My recipes</option>
+          <option value="option3">My family recipes</option>
+        </select>
+        {{ $root.store.username }}: <button @click="logout">Logout</button>
       </span>
     </div>
     <router-view />
@@ -20,8 +25,22 @@
 <script>
 export default {
   name: "App",
+  data() {
+    return {
+      selectedOption: "select"
+    };
+  },
   methods: {
-    Logout() {
+    navigateToOption() {
+      if (this.selectedOption === "option1") {
+        this.$router.push({ name: "myFavoriteRecipes" });
+      } else if (this.selectedOption === "option2") {
+        this.$router.push({ name: "myRecipes" });
+      } else if (this.selectedOption === "option3") {
+        this.$router.push({ name: "myFamilyRecipes" });
+      }
+    },
+    logout() {
       this.$root.store.logout();
       this.$root.toast("Logout", "User logged out successfully", "success");
 
@@ -46,6 +65,18 @@ export default {
 
 #nav {
   padding: 30px;
+  width: 100%;
+  background-color: lightblue;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-content: center;
+  align-items: center;
+}
+
+.nav_btn{
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 #nav a {
