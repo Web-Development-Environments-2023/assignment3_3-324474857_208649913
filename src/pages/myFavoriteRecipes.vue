@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-      <h1 class="title">Main Page</h1>
-      <RecipePreviewList title="Random Recipes" server_url="/users/favorites" class="RandomRecipes center" />
+      <h1 class="title">Favorites Page</h1>
+      <RecipePreviewList title="Favorite Recipes" server_url="/users/favorites" class="RandomRecipes center" />
     </div>
 </template>
   

@@ -33,19 +33,19 @@ const routes = [
     component: () => import("./pages/RecipeViewPage"),
   },
   {
-    path: "favoriteRecipes",
+    path: "/favoriteRecipes",
     name: "myFavoriteRecipes",
     component: () => import("./pages/myFavoriteRecipes"),
   },
   {
-    path: "myRecipes",
+    path: "/myRecipes",
     name: "myRecipes",
     component: () => import("./pages/myRecipes"),
   },
   {
-    path: "myfamilyRecipes",
+    path: "/myfamilyRecipes",
     name: "myFamilyRecipes",
-    component: () => import("./pages/myFamilyRecipes"),
+    component: () => import("./pages/myFamilyRecipesPage"),
   },
   {
     path: "*",
