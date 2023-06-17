@@ -1,23 +1,42 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link class="nav_btn" :to="{ name: 'main' }">Main</router-link>
-      <router-link class="nav_btn" :to="{ name: 'search' }">Search</router-link>
-      <router-link class="nav_btn" :to="{ name: 'about' }">About</router-link>
-      <span v-if="!$root.store.username">
-        Hello guest
-        <router-link class="nav_btn" :to="{ name: 'register' }">Register</router-link>
-        <router-link class="nav_btn" :to="{ name: 'login' }">Login</router-link>
-      </span>
-      <span v-else>
-        <select v-model="selectedOption" @change="navigateToOption">
-          <option value="option1">My favorite recipes</option>
-          <option value="option2">My recipes</option>
-          <option value="option3">My family recipes</option>
-        </select>
-        {{ $root.store.username }}: <button @click="logout">Logout</button>
-      </span>
-    </div>
+    <b-navbar toggleable="lg" type="dark" variant="light">
+       <b-navbar-brand><img class="logo" :src="logo" alt="logo Icon" width="60" /></b-navbar-brand>
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav>
+          <b-nav-item><router-link class="nav_link" :to="{ name: 'search' }">Search</router-link></b-nav-item>
+          <b-nav-item><router-link class="nav_link" :to="{ name: 'main' }">Main</router-link></b-nav-item>
+          <b-nav-item><router-link class="nav_link" :to="{ name: 'about' }">About</router-link></b-nav-item>
+        </b-navbar-nav>
+
+        <!-- Right aligned nav items -->
+        <b-navbar-nav class="ml-auto">
+          <b-nav-item-dropdown v-if="$root.store.username" right>
+            <!-- Using 'button-content' slot -->
+            <template #button-content >
+              <em style="color:rgba(91, 184, 91, 0.704);">{{ $root.store.username }}<i class="bi bi-caret-down-fill ml-2" ></i></em>
+            </template>
+            <b-dropdown-item ><router-link class="nav_link" :to="{ name: 'myFavoriteRecipes' }">My favorite
+                recipes</router-link></b-dropdown-item>
+            <b-dropdown-item><router-link class="nav_link" :to="{ name: 'myRecipes' }">My
+                recipes</router-link></b-dropdown-item>
+            <b-dropdown-item><router-link class="nav_link" :to="{ name: 'myFamilyRecipes' }">My family
+                recipes</router-link></b-dropdown-item>
+          </b-nav-item-dropdown>
+          <b-button v-if="$root.store.username" variant="success" size="sm" class="my-2 my-sm-1 ml-2 mr-2" @click="logout">Logout</b-button>
+          <b-nav-item v-if="!$root.store.username">
+            <span v-if="!$root.store.username" style="color:rgba(91, 184, 91, 0.704);">Hello guest</span>
+            <b-button size="sm" class="my-2 my-sm-0 ml-3" variant="success">
+              <router-link class="nav_btn" :to="{ name: 'login' }">Login</router-link>
+            </b-button>
+            <b-button size="sm" class="my-2 my-sm-0 ml-3" variant="success">
+              <router-link class="nav_btn" :to="{ name: 'register' }">Register</router-link>
+            </b-button>
+          </b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
     <router-view />
   </div>
 </template>
@@ -27,7 +46,9 @@ export default {
   name: "App",
   data() {
     return {
-      selectedOption: "select"
+      selectedOption: "select",
+      logo:require('@/assets/logo.png'),
+
     };
   },
   methods: {
@@ -47,8 +68,8 @@ export default {
       this.$router.push("/").catch(() => {
         this.$forceUpdate();
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -63,28 +84,26 @@ export default {
   min-height: 100vh;
 }
 
-#nav {
-  padding: 30px;
-  width: 100%;
-  background-color: lightblue;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  align-content: center;
-  align-items: center;
+.nav_link {
+
+  color: rgb(91, 184, 91);
+  transition: ease-in-out .1s;
 }
 
 .nav_btn{
-  margin-left: 10px;
-  margin-right: 10px;
+  color: white;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.nav_btn:hover{
+  color: white;
+  text-decoration: none;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+
+.nav_link:hover{
+  color: rgb(50, 108, 50);
+  text-decoration: none;
 }
+
+
 </style>
