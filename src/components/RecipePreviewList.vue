@@ -9,6 +9,9 @@
         <RecipePreview class="recipePreview" :recipe="r" />
       </b-col>
     </b-row>
+    <div v-if="isRecipesListEmpty">
+      {{ this.not_found_message }}
+    </div>
   </b-container>
 </template>
 
@@ -27,11 +30,17 @@ export default {
     server_url: {
       type: String,
       required: true
+    },
+    notFound_msg: {
+      type: String,
+      required: false,
+      default: "No Recipes Found",
     }
   },
   data() {
     return {
-      recipes: []
+      recipes: [],
+      not_found_message: this.notFound_msg,
     };
   },
   mounted() {
@@ -54,6 +63,11 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    }
+  },
+  computed:{
+    isRecipesListEmpty(){
+      return this.recipes.length === 0;
     }
   }
 };

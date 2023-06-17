@@ -1,16 +1,16 @@
 <template>
   <div class="container">
-    <h1 class="title">Family Recipes Page</h1>
-    <FamilyRecipeList title="Family Recipes" server_url="/users/family-recipes" 
-    notFound_msg="This user has not added family recipes" class="RandomRecipes center" />
+    <h1 class="title">My Recipes Page</h1>
+    <RecipePreviewList title="My Recipes" server_url="/users/my-recipes" 
+    notFound_msg="You have not created any new recipes yet" class="RandomRecipes center" />
   </div>
 </template>
 
 <script>
-import FamilyRecipeList from "../components/FamilyRecipeList";
+import RecipePreviewList from "../components/RecipePreviewList";
 export default {
   components: {
-    FamilyRecipeList
+    RecipePreviewList
   }
 };
 </script>

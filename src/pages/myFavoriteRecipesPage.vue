@@ -1,7 +1,8 @@
-<!-- <template>
+<template>
     <div class="container">
-      <h1 class="title">My Recipes Page</h1>
-      <RecipePreviewList title="User's Recipes" server_url="/users/my-recipes" class="RandomRecipes center" />
+      <h1 class="title">Favorites Page</h1>
+      <RecipePreviewList title="Favorite Recipes" server_url="/users/favorites" 
+      notFound_msg="You have not added any favorite recipes yet" class="RandomRecipes center" />
     </div>
 </template>
   
@@ -27,4 +28,4 @@
     cursor: default;
   }
   </style>
-   -->
+  
