@@ -1,4 +1,4 @@
-
+✓
 
 * Navbar: 
     * Main ✓
@@ -61,8 +61,8 @@
         * Diet ✓
         * intolerance ✓
     - Results: Recipe Preview array ✓
-    - Sort by buttons: Preparation time, Popularity 
-    - Not found message 
+    - Sort by buttons: Preparation time, Popularity ✓
+    - Not found message ✓
 
 *Add New MyRecipe - Modal Window:
     - Form to input recipe info 

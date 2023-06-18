@@ -1,11 +1,9 @@
 -Create My Recipe Button 
 -Favorite star on previewRecipe fix
-- watched POST request on RecipePage open - Check if working
+ 
 
 Search: 
     - Last search for a logged in user, None for not logged 
-    - Sort by buttons: Preparation time, Popularity 
-    - Not found message 
 
 
 * Recipe Preview Requirements:
@@ -17,3 +15,6 @@ Search:
 
 Questions:
 * What is marked variable on RecipePreview.vue (not used ?)
+
+Check if working:
+- watched POST request on RecipePage open 
