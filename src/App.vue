@@ -5,8 +5,8 @@
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item><router-link class="nav_link" :to="{ name: 'search' }">Search</router-link></b-nav-item>
           <b-nav-item><router-link class="nav_link" :to="{ name: 'main' }">Main</router-link></b-nav-item>
+          <b-nav-item><router-link class="nav_link" :to="{ name: 'search' }">Search</router-link></b-nav-item>
           <b-nav-item><router-link class="nav_link" :to="{ name: 'about' }">About</router-link></b-nav-item>
         </b-navbar-nav>
 
