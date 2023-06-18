@@ -1,2 +1,19 @@
-* Consider adding get method for /recipes/watched to show user's last 3 vs Save locally 3 last and start from 0
-* Unable to get user_id from user's req.session (cookie)
+-Create My Recipe Button 
+-Register validation
+- Button: Generate new 3 recipes
+-Favorite star on previewRecipe fix
+- watched POST request on RecipePage open
+
+Search: 
+    - Last search for a logged in user, None for not logged 
+    - Sort by buttons: Preparation time, Popularity 
+    - Not found message 
+
+
+* Recipe Preview Requirements:
+    - watched indication 
+    - favorites indication
+    - design the image to be evidently clickable 
+
+- 3 Recipes for family recipes
+

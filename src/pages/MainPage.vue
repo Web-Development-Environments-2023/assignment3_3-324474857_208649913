@@ -2,18 +2,18 @@
   <div class="container">
     <h1 class="title">Main Page</h1>
     <RecipePreviewList title="Random Recipes" server_url="/recipes" class="RandomRecipes center" />
-    <router-link v-if="!$root.store.username" to="/login" tag="button">You need to Login to vue this</router-link>
-    {{ !$root.store.username }}
-    <RecipePreviewList
+    <RecipePreviewList v-if="$root.store.username"
       title="Last Viewed Recipes"
       server_url="/recipes/watched"
       :class="{
         RandomRecipes: true,
-        blur: !$root.store.username,
         center: true
       }"
       disabled
     ></RecipePreviewList>
+    <div v-else>
+      <LoginPage></LoginPage>
+    </div>
     <!-- <div
       style="position: absolute;top: 70%;left: 50%;transform: translate(-50%, -50%);"
     >
@@ -24,9 +24,11 @@
 
 <script>
 import RecipePreviewList from "../components/RecipePreviewList";
+import LoginPage from "../pages/LoginPage";
 export default {
   components: {
-    RecipePreviewList
+    RecipePreviewList, 
+    LoginPage,
   }
 };
 </script>

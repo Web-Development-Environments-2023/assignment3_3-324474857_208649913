@@ -1,10 +1,18 @@
 <template>
 
   <div>
-    <b-card
+    <!-- <b-card
       v-if="image_load"
       :title="recipe.title"
       :img-src="recipe.image"
+      img-alt="Image"
+      img-top
+      tag="article"
+      style="max-width: 20rem;"
+      class="mb-2"
+    > -->
+    <b-card
+      :title="recipe.title"
       img-alt="Image"
       img-top
       tag="article"

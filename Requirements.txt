@@ -1,82 +1,82 @@
-✓
+
 
 * Navbar: 
-    * Main 
-    * Search 
-    * About 
+    * Main ✓
+    * Search ✓
+    * About ✓
     - Not Logged in user:
-        * Login
-        * Register
-        * Hello guest message 
+        * Login ✓
+        * Register ✓
+        * Hello guest message ✓
     - Logged in user:
-        * Name message
-        * Personal dropdown:
-            * myFavoriteRecipes
-            * my recipes
-            * myFamilyRecipes
-        * Create My Recipe Button
-        * Logout Button
+        * Name message ✓
+        * Personal dropdown: 
+            * myFavoriteRecipes ✓
+            * my recipes ✓
+            * myFamilyRecipes ✓
+        * Create My Recipe Button 
+        * Logout Button ✓
 
 * About
-    * Links to prev assignments
-    * About us Section
+    * Links to prev assignments ✓
+    * About us Section ✓
 
 * Register
-    * all user inputs
-        - Countries dropdown
-    * Input validation 
+    * all user inputs ✓
+        - Countries dropdown ✓
+    * Input validation  
 
 * Login 
-    - User login validation
+    - User login validation ✓
 
 * Main 
     2 Columns: 
         Left Col:
-            - Title: Explire this recipes
-            - 3 random recipes.
+            - Title: Explire this recipes ✓
+            - 3 random recipes.  ✓
             - Button: Generate new 3 recipes
         Right Col:
             For Logged Users:
-                -  3 Last watched recipes 
+                -  3 Last watched recipes ✓
             For not Logged:
-                - Login Page
+                - Login Page ✓
 
 * Recipe Page
-    - Recipe Details 
-    - Recipe Image
+    - Recipe Details ✓
+    - Recipe Image ✓
 
 * Recipe Preview Requirements: 
-    - data
+    - data ✓
     - watched indication 
     - favorites indication
     - design the image to be evidently clickable 
 
 * Search Page
-    - Search input field 
-    - Search button
-    - Last search for a logged in user, None for not logged
-    - Results number choice: 5/10/15
+    - Search input field ✓
+    - Search button ✓
+    - Last search for a logged in user, None for not logged 
+    - Results number choice: 5/10/15 ✓
     - Filters dropdown: 
-        * cuisine
-        * Diet 
-        * intolerance
-    - Results: Recipe Preview array
-    - Sort by buttons: Preparation time, Popularity
+        * cuisine ✓
+        * Diet ✓
+        * intolerance ✓
+    - Results: Recipe Preview array ✓
+    - Sort by buttons: Preparation time, Popularity 
     - Not found message 
 
 *Add New MyRecipe - Modal Window:
-    - Form to input recipe info
-    - Add button
+    - Form to input recipe info 
+    - Add button 
 
 * My favorites Page
-    - Recipe Preview array
+    - Recipe Preview array ✓
 
 * My Recipes Page
-    - Recipe Preview array
+    - Recipe Preview array ✓
 
 * My FamilyRecipes Page
     for 2 specific users(fot testing purposes):
-        - 3 family recipes 
+        - 3 family recipes ✓ 
 
 
 
