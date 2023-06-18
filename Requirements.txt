@@ -24,7 +24,7 @@
 * Register
     * all user inputs ✓
         - Countries dropdown ✓
-    * Input validation  
+    * Input validation  ✓
 
 * Login 
     - User login validation ✓
@@ -34,7 +34,7 @@
         Left Col:
             - Title: Explire this recipes ✓
             - 3 random recipes.  ✓
-            - Button: Generate new 3 recipes
+            - Button: Generate new 3 recipes ✓
         Right Col:
             For Logged Users:
                 -  3 Last watched recipes ✓

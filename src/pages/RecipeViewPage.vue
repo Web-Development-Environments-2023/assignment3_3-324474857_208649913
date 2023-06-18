@@ -6,8 +6,8 @@
         <img :src="recipe.image" class="center" />
       </div>
       <div>
-        <i v-if="recipe.watched" class="bi bi-eye-fill" style="font-size:20px" ></i>
-        <FavoriteStar :favorited="recipe.favorite" :recipeId="recipe.id"></FavoriteStar>
+        <i v-if="$root.store.username && recipe.watched" class="bi bi-eye-fill" style="font-size:20px" ></i>
+        <FavoriteStar v-if="$root.store.username" :favorited="recipe.favorite" :recipeId="recipe.id"></FavoriteStar>
         <i v-if="!recipe.watched"  class="bi bi-eye" style="font-size:20px"></i>
         <img v-if="recipe.vegan" :src="vegan" alt="Vegan Icon" width="35px" />
         <img v-if="recipe.vegetarian" :src="vegetarian" alt="Vegan Icon" width="35px" />
@@ -97,10 +97,27 @@ export default {
       };
 
       this.recipe = _recipe;
+      this.markAsWatched(this.$route.params.recipeId);
     } catch (error) {
       console.log(error);
     }
-  },components:{
+  },
+  methods: {
+    async markAsWatched(recipeId){
+      try{
+        if($root.store.username){
+          const response = await this.axios.post( this.$root.store.server_domain + '/recipes/watched', {recipeId:recipeId},
+          { withCredentials: true }
+          );
+        }
+      }
+      catch(error){
+        console.log(error);
+      }
+      
+    }
+  },
+  components:{
     FavoriteStar
   }
 }

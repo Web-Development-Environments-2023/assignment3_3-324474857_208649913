@@ -16,11 +16,13 @@ export default {
     methods:{
     async markAsFavorite(recipeId){
       try{
-        const response = await this.axios.post( this.$root.store.server_domain + '/users/favorites', {recipeId:recipeId},
+        // Send request only if the user is logged in
+        if ($root.store.username){
+          const response = await this.axios.post( this.$root.store.server_domain + '/users/favorites', {recipeId:recipeId},
           { withCredentials: true }
-        );
-        this.marked = true;
-
+          );
+          this.marked = true;
+        }
       }
       catch(error){
         console.log(error);

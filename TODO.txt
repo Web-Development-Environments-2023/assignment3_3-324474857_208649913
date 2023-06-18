@@ -1,8 +1,6 @@
 -Create My Recipe Button 
--Register validation
-- Button: Generate new 3 recipes
 -Favorite star on previewRecipe fix
-- watched POST request on RecipePage open
+- watched POST request on RecipePage open - Check if working
 
 Search: 
     - Last search for a logged in user, None for not logged 
@@ -17,3 +15,5 @@ Search:
 
 - 3 Recipes for family recipes
 
+Questions:
+* What is marked variable on RecipePreview.vue (not used ?)

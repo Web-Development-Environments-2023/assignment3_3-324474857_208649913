@@ -21,7 +21,7 @@
           Username length should be between 3-8 characters long
         </b-form-invalid-feedback>
         <b-form-invalid-feedback v-if="!$v.form.username.alpha">
-          Username alpha
+          Username must contain only alphabetic characters.
         </b-form-invalid-feedback>
       </b-form-group>
 
@@ -65,6 +65,11 @@
           v-if="$v.form.password.required && !$v.form.password.length"
         >
           Have length between 5-10 characters long
+        </b-form-invalid-feedback>
+        <b-form-invalid-feedback
+          v-if="!$v.form.password.containsNumberAndSpecialChar"
+        >
+        Password must contain at least one number and one special character.
         </b-form-invalid-feedback>
       </b-form-group>
 
@@ -161,7 +166,12 @@ export default {
       },
       password: {
         required,
-        length: (p) => minLength(5)(p) && maxLength(10)(p)
+        length: (p) => minLength(5)(p) && maxLength(10)(p), 
+        containsNumberAndSpecialChar(value) {
+          // Custom validation rule to check if password contains at least one number and one special character
+          const regex = /^(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/;
+          return regex.test(value);
+        }
       },
       confirmedPassword: {
         required,

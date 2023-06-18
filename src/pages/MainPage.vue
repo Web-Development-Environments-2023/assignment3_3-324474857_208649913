@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <h1 class="title">Main Page</h1>
-    <RecipePreviewList title="Random Recipes" server_url="/recipes" class="RandomRecipes center" />
+    <RecipePreviewList ref="random_recipesList" title="Random Recipes" server_url="/recipes" class="RandomRecipes center" />
+    <b-button @click="moreRandomRecipes" variant="primary">More Recipes</b-button>
     <RecipePreviewList v-if="$root.store.username"
       title="Last Viewed Recipes"
       server_url="/recipes/watched"
@@ -29,7 +30,12 @@ export default {
   components: {
     RecipePreviewList, 
     LoginPage,
-  }
+  },
+  methods: {
+    moreRandomRecipes() {
+      this.$refs.random_recipesList.updateRecipes();
+    },
+  },
 };
 </script>
 
