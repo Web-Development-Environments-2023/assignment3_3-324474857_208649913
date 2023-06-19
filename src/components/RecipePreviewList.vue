@@ -2,7 +2,7 @@
   <b-container class="container">
     <b-row>
       <div class="recipes_container" v-for="r in recipes" :key="r.id">
-        <RecipePreview class="recipePreview" :recipe="r" />
+        <RecipePreview class="recipePreview" :recipe="r" :myRecipe="myRecipe" />
       </div>
     </b-row>
     <div v-if="isRecipesListEmpty">
@@ -26,6 +26,10 @@ export default {
     server_url: {
       type: String,
       required: true
+    },
+    myRecipe: {
+      type: String,
+      required: false
     },
     notFound_msg: {
       type: String,

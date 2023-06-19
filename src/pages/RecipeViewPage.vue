@@ -18,11 +18,11 @@
           <div class="wrapped">
             <div class="mb-3">
               <div><b>Ready in:</b> {{ recipe.readyInMinutes }} minutes</div>
-              <div><b>Likes:</b> {{ recipe.popularity }} likes</div>
+              <div v-if="this.$route.params.myRecipe !== 'true'"><b>Likes:</b> {{ recipe.popularity }} likes</div>
               <div><b>Serving:</b> {{ recipe.servings }}</div>
             </div>
             <b>Ingredients:</b>
-            <ul>
+            <ul v-if="this.$route.params.myRecipe !== 'true'">
               <li
                 v-for="(r, index) in recipe.extendedIngredients"
                 :key="index + '_' + r.id"
@@ -30,6 +30,7 @@
                 {{ r.original }}
               </li>
             </ul>
+            <p v-if="this.$route.params.myRecipe === 'true'">{{ recipe.ingredients }}</p>
           </div>
           <div class="wrapped">
             <b>Instructions</b>
@@ -58,18 +59,21 @@ export default {
     try {
       let response;
       try {
+        if(this.$route.params.myRecipe === undefined){
         response = await this.axios.get(
           `${this.$root.store.server_domain}/recipes/${this.$route.params.recipeId}`,
           { withCredentials: true }
         );
         console.log(response.data)
+        
         if (response.status !== 200) this.$router.replace("/NotFound");
+        }
       } catch (error) {
         console.log("error.response.status", error.response.status);
         this.$router.replace("/NotFound");
         return;
       }
-
+      let my = this.$route.params.myRecipe;
       let {
         instructions,
         extendedIngredients,
@@ -80,8 +84,9 @@ export default {
         vegan,
         vegetarian,
         glutenFree,
-        servings
-      } = response.data
+        servings,
+        ingredients
+      } = my === 'true' ? this.$route.params.recipe :response.data
 
       let _recipe = {
         instructions,
@@ -93,11 +98,13 @@ export default {
         vegan,
         vegetarian,
         glutenFree,
-        servings
+        servings,
+        ingredients
       };
 
       this.recipe = _recipe;
-      this.markAsWatched(this.$route.params.recipeId);
+      if (my === undefined)
+        this.markAsWatched(this.$route.params.recipeId);
     } catch (error) {
       console.log(error);
     }
@@ -119,7 +126,7 @@ export default {
   },
   components:{
     FavoriteStar
-  }
+  },
 }
 </script>
 

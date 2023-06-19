@@ -31,7 +31,7 @@
         <img v-if="recipe.glutenFree" :src="glutenFree" alt="glutenFree Icon" width="30px" height="30px" />
       </div>
       <router-link
-        :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
+        :to="{ name: 'recipe', params: { recipeId: recipe.id, recipe:recipe, myRecipe:myRecipe } }"
         class="recipe-preview"
       >
         <div class="buttonWrapper">
@@ -81,6 +81,10 @@ export default {
     recipe: {
       type: Object,
       required: true,
+    },
+    myRecipe: {
+      type: String,
+      required: false,
     },
   },
   components:{

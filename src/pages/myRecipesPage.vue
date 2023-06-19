@@ -1,10 +1,8 @@
 <template>
-  <div>
-    <h2 id="title" class="text-center mt-5 mb-5">My recipes</h2>
+  <div class="contrainer">
+    <h2 id="title" class="text-center pt-5 mb-5">My recipes</h2>
+    <b-button class="new_button" v-b-modal.modal-prevent-closing @click="showModal" variant="success">+ New recipe</b-button>
     <div class="main_container">
-      <b-button v-b-modal.modal-prevent-closing @click="showModal"
-        >Open Modal</b-button
-      >
       <b-modal
         id="modal-prevent-closing"
         ref="modal"
@@ -110,6 +108,7 @@
           title="My Recipes"
           server_url="/users/my-recipes"
           class="my recipes center"
+          myRecipe="true"
         />
       </div>
     </div>
@@ -240,5 +239,15 @@ export default {
 #title {
   color: rgb(91, 184, 91);
   font-size: 35px;
+}
+
+.contrainer{
+  display: flex;
+  flex-direction: column;
+}
+
+.new_button{
+  width: 130px;
+  margin: auto;
 }
 </style>
