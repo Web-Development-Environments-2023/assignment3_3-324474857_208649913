@@ -52,15 +52,7 @@ export default {
     };
   },
   methods: {
-    navigateToOption() {
-      if (this.selectedOption === "option1") {
-        this.$router.push({ name: "myFavoriteRecipes" });
-      } else if (this.selectedOption === "option2") {
-        this.$router.push({ name: "myRecipes" });
-      } else if (this.selectedOption === "option3") {
-        this.$router.push({ name: "myFamilyRecipes" });
-      }
-    },
+    
     logout() {
       this.$root.store.logout();
       this.$root.toast("Logout", "User logged out successfully", "success");

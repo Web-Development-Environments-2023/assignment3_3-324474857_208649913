@@ -45,6 +45,7 @@ export default {
   },
   mounted() {
     this.updateRecipes();
+    
   },
   methods: {
     async updateRecipes() {
@@ -54,7 +55,7 @@ export default {
           { withCredentials: true }
         );
 
-        // console.log(response);
+        console.log(response);
         const recipes = response.data;
         this.recipes = [];
         this.recipes.push(...recipes);
@@ -77,4 +78,5 @@ export default {
 .container {
   min-height: 400px;
 }
+
 </style>

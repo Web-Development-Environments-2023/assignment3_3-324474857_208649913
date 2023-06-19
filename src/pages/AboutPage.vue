@@ -3,7 +3,9 @@
   <div class="container mt-5">
     <div class="row">
       <div class="col">
+        <Transition name="slide-fade">
         <h2 id="title" class="text-center">About Us</h2>
+      </Transition>
         <div class="w-75 mx-auto">
           <p class="text-center mt-4">
             Welcome to Flavor Fiesta, your ultimate destination for delicious

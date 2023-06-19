@@ -201,6 +201,13 @@ export default {
 };
 </script>
 <style>
+.main_section{
+  display: flex;
+}
+
+.results_section{
+  margin-top: 50px;
+}
 
 .search_section{
   display: flex;
