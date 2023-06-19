@@ -17,25 +17,28 @@
   </div>
     
   </div>
-  <div v-if="showResults" class="results_section">
-    <!-- Sort buttons with arrow icons -->
-    <div>
-        <b-button @click="toggleSort('popularity')" size="sm" class="my-2 my-sm-3 w-75" variant="primary">
+  <div class="results_wrapper">
+    <h2 id="title" class="text-center mt-5 mb-2">Search</h2>
+    <div class="sorting_buttons" v-if="showResults">
+        <b-button @click="toggleSort('popularity')" size="sm" class="my-2 my-sm-3 mr-2" variant="light">
           Sort by Popularity
           <i v-if="currentSortBy === 'popularity'" :class="{'bi-arrow-up': sortOrderPopularity, 'bi-arrow-down': !sortOrderPopularity}"></i>
         </b-button>
-        <b-button @click="toggleSort('readyInMinutes')" size="sm" class="my-2 my-sm-3 w-75" variant="primary">
+        <b-button @click="toggleSort('readyInMinutes')" size="sm" class="my-2 my-sm-3 ml-2" variant="light">
           Sort by Preparation Time
           <i v-if="currentSortBy === 'readyInMinutes'" :class="{'bi-arrow-up': sortOrderPreparation, 'bi-arrow-down': !sortOrderPreparation}"></i>
         </b-button>
     </div>
+  <div v-if="showResults" class="results_section">
     <ul>
       <RecipePreview v-for="recipe in recipes" :key="recipe.id" :recipe="recipe" />
     </ul>
   </div>
-  <div v-if="showNoResultsMsg" class="no_results_section">
+  <div v-if="showNoResultsMsg" class="no_results_section text-center mt-5">
     <h3> No recipes found...</h3>
   </div>
+</div>
+  
 </div>
 </template>
 
@@ -206,7 +209,9 @@ export default {
 }
 
 .results_section{
-  margin-top: 50px;
+  /* margin-top: 50px; */
+  display: flex;
+  justify-content: center;
 }
 
 .search_section{
@@ -217,6 +222,7 @@ export default {
   height: 100vh;
   padding: 15px;
   padding-top: 40px;
+
 }
 
 .bi-arrow-up::before {
@@ -227,4 +233,20 @@ export default {
   font-size: 12px;
 }
 
+.results_wrapper{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sorting_buttons{
+  margin: auto;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+#title {
+  color: rgb(91, 184, 91);
+  font-size: 35px;
+}
 </style>

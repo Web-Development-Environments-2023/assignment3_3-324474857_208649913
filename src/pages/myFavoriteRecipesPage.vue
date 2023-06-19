@@ -1,8 +1,8 @@
 <template>
     <div class="container">
-      <h1 class="title">Favorites Page</h1>
-      <RecipePreviewList title="Favorite Recipes" server_url="/users/favorites" 
-      notFound_msg="You have not added any favorite recipes yet" class="RandomRecipes center" />
+      <h1 id="title" class="text-center pt-5 mb-3">Favorites Page</h1>
+      <RecipePreviewList  title="Favorite Recipes " server_url="/users/favorites" 
+      notFound_msg="You have not added any favorite recipes yet" class="favorite_list" />
     </div>
 </template>
   
@@ -27,5 +27,18 @@
     pointer-events: none;
     cursor: default;
   }
+
+  #title {
+  color: rgb(91, 184, 91);
+  font-size: 35px;
+}
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.favorite_list{
+  margin: auto;
+}
   </style>
   

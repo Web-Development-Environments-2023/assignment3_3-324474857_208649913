@@ -37,7 +37,10 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-    <router-view />
+    <router-view class="router" :style="{ backgroundImage: `url(${bg})` }" />
+    <div class="footer">
+      All rights reserved to Ariel Dawidowicz & Eithan Markman ©
+    </div>
   </div>
 </template>
 
@@ -48,6 +51,7 @@ export default {
     return {
       selectedOption: "select",
       logo:require('@/assets/logo.png'),
+      bg:require('@/assets/bg.jpg'),
 
     };
   },
@@ -96,6 +100,19 @@ export default {
   color: rgb(50, 108, 50);
   text-decoration: none;
 }
+.footer{
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(213, 202, 152, 0.705);
+}
 
+.router{
+  min-height: 100vh;
+  min-width: 100vw;
+  background-size: auto;
+  background-position: center;
+}
 
 </style>

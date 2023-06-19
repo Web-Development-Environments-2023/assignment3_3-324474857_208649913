@@ -19,25 +19,26 @@
       style="max-width: 20rem;"
       class="mb-2"
     >
-      <b-card-text> Ready in {{ recipe.readyInMinutes }} minutes </b-card-text>
-      <b-card-text> Popularity: {{ recipe.popularity }} likes </b-card-text>
+      <b-card-text> <b>Ready in:</b> {{ recipe.readyInMinutes }} minutes </b-card-text>
+      <b-card-text v-if="recipe.popularity>0"> <b>Popularity:</b> {{ recipe.popularity }} likes </b-card-text>
 
+      <div class="data_wrapper">
       <div class="data">
-        <i v-if="recipe.watched" class="bi bi-eye-fill" style="font-size:20px" ></i>
-        <i v-if="!recipe.watched"  class="bi bi-eye" style="font-size:20px"></i>
+        <i v-if="recipe.watched" class="bi bi-eye-fill " style="font-size:20px" ></i>
         <FavoriteStar v-if="$root.store.username" :recipeId="recipe.id" :favorited="recipe.favorite"/>
-        <img v-if="recipe.vegan" :src="vegan" alt="Vegan Icon" width="35px" />
-        <img v-if="recipe.vegetarian" :src="vegetarian" alt="Vegan Icon" width="35px" />
-        <img v-if="recipe.glutenFree" :src="glutenFree" alt="Vegan Icon" width="30px" />
+        <img v-if="recipe.vegan" :src="vegan" alt="Vegan Icon" width="50px" height="30px" />
+        <img v-if="recipe.vegetarian" :src="vegetarian" alt="Vegan Icon" width="35px" height="35px" />
+        <img v-if="recipe.glutenFree" :src="glutenFree" alt="glutenFree Icon" width="30px" height="30px" />
       </div>
       <router-link
         :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
         class="recipe-preview"
       >
         <div class="buttonWrapper">
-        <b-button  id="watchBtn" variant="primary">Watch full recipe</b-button>
+        <b-button  id="watchBtn" variant="warning">Watch full recipe</b-button>
       </div>
       </router-link>
+    </div>
     </b-card>
   </div>
 </template>
@@ -172,6 +173,23 @@ export default {
 #watchBtn{
   margin: auto;
 }
+
+.data{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card{
+  border-radius: 20px;
+  box-shadow: 0px 0px 20px  #0000000f;
+  height: 100%;
+  display: flex;
+}
+
+.data_wrapper{
+}
+
 
 
 </style>

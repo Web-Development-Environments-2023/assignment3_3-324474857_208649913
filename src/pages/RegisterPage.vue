@@ -1,5 +1,7 @@
 <template>
+
   <div class="container">
+    <div class="wrapper">
     <h1 class="title">Register</h1>
     <b-form @submit.prevent="onRegister" @reset.prevent="onReset">
       <b-form-group
@@ -94,16 +96,18 @@
           The confirmed password is not equal to the original password
         </b-form-invalid-feedback>
       </b-form-group>
-
-      <b-button type="reset" variant="danger">Reset</b-button>
+      <div>
+      <b-button type="reset" variant="danger" class="wd-25">Reset</b-button>
       <b-button
         type="submit"
-        variant="primary"
+        variant="success"
         style="width:250px;"
-        class="ml-5 w-75"
+        class="ml-4 w-75"
+        size=""
         >Register</b-button
       >
-      <div class="mt-2">
+    </div>
+      <div class="mt-2 text-center">
         You have an account already?
         <router-link to="login"> Log in here</router-link>
       </div>
@@ -122,6 +126,7 @@
       <pre class="m-0"><strong>$v.form:</strong> {{ $v.form }}</pre>
     </b-card> -->
   </div>
+</div>
 </template>
 
 <script>
@@ -235,6 +240,18 @@ export default {
 </script>
 <style lang="scss" scoped>
 .container {
-  max-width: 500px;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+  width: 500px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 15px #0000003a;
 }
 </style>

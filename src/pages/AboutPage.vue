@@ -1,11 +1,9 @@
 
 <template>
-  <div class="container mt-5">
+  <div class="container ">
     <div class="row">
       <div class="col">
-        <Transition name="slide-fade">
-        <h2 id="title" class="text-center">About Us</h2>
-      </Transition>
+        <h2 id="title" class="text-center mt-5">About Us</h2>
         <div class="w-75 mx-auto">
           <p class="text-center mt-4">
             Welcome to Flavor Fiesta, your ultimate destination for delicious
@@ -26,8 +24,8 @@
       </div>
     </div>
 
-    <div class="row mt-3">
-      <div class="col-md-6 d-flex align-items-center justify-content-center">
+    <div id="team_section" class="row mt-3 ">
+      <div class="col-md-6 d-flex align-items-center justify-content-center ">
         <div class="card">
           <img
             :src="ariel"
@@ -123,6 +121,18 @@ export default {
 </script>
 
 <style scoped>
+
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#team_section{
+  width: 80%;
+  margin: auto;
+  height: 100%;
+}
+
 #team_image {
   width: 230px;
   border-radius: 100%;
@@ -131,10 +141,12 @@ export default {
 }
 
 .card {
-  background-color: rgba(237, 240, 237, 0.567);
+  background-color: rgb(253, 253, 253);
   border-radius: 30px;
-  border: 5px solid rgba(91, 184, 91, 0.045);
   padding-top: 20px;
+  box-shadow: 0px 0px 15px #0000001d;
+  height: 100%;
+
 }
 
 #title {
@@ -143,10 +155,13 @@ export default {
 }
 
 .together_projects{
-  background-color: rgba(237, 240, 237, 0.567);
+  background-color: rgb(253, 253, 253);
   border-radius: 30px;
-  border: 5px solid rgba(91, 184, 91, 0.045);
+  box-shadow: 0px 0px 15px #0000001d;
   padding-top: 20px;
+  padding: 15px;
+  width: 80%;
+  margin: auto;
 
 }
 </style>

@@ -1,25 +1,24 @@
 <template>
   <div class="container">
-    <h1 class="title">Main Page</h1>
-    <RecipePreviewList ref="random_recipesList" title="Random Recipes" server_url="/recipes" class="RandomRecipes center" />
-    <b-button @click="moreRandomRecipes" variant="primary">More Recipes</b-button>
-    <RecipePreviewList v-if="$root.store.username"
-      title="Last Viewed Recipes"
-      server_url="/recipes/watched"
-      :class="{
-        RandomRecipes: true,
-        center: true
-      }"
-      disabled
-    ></RecipePreviewList>
-    <div v-else>
-      <LoginPage></LoginPage>
+    <div class="random_section">
+      <h1 id="title" class="mt-5 ">Main Page</h1>
+      <RecipePreviewList ref="random_recipesList" title="Random Recipes" server_url="/recipes" class="RandomRecipes" />
+      <b-button @click="moreRandomRecipes" variant="primary">More Recipes</b-button>
     </div>
-    <!-- <div
-      style="position: absolute;top: 70%;left: 50%;transform: translate(-50%, -50%);"
-    >
-      Centeredasdasdad
-    </div>-->
+    <div class="bottom">
+      <RecipePreviewList v-if="$root.store.username"
+        title="Last Viewed Recipes"
+        server_url="/recipes/watched"
+        :class="{
+          RandomRecipes: true,
+          center: true
+        }"
+        disabled
+      ></RecipePreviewList>
+      <div v-else>
+        <LoginPage class="login_page"></LoginPage>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -40,15 +39,42 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.RandomRecipes {
-  margin: 10px 0 10px;
+.container {
+  width: 95vw;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-.blur {
-  -webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */
-  filter: blur(2px);
+
+.RandomRecipes{
+  margin-left: 180px;
 }
-::v-deep .blur .recipe-preview {
-  pointer-events: none;
-  cursor: default;
+
+.random_section {
+  width: 99vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Add this line to center horizontally */
 }
+
+.bottom {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+  padding-bottom: 20px;
+  background-color: rgb(245, 239, 215);
+  width: 99vw;
+}
+#title {
+  color: rgb(91, 184, 91);
+  font-size: 35px;
+}
+
+.login_page{
+  height: 300px;
+}
+
 </style>

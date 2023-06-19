@@ -1,13 +1,9 @@
 <template>
-  <b-container>
-    <h3>
-      {{ title }}:
-      <slot></slot>
-    </h3>
+  <b-container class="container">
     <b-row>
-      <b-col v-for="r in recipes" :key="r.id">
+      <div class="recipes_container" v-for="r in recipes" :key="r.id">
         <RecipePreview class="recipePreview" :recipe="r" />
-      </b-col>
+      </div>
     </b-row>
     <div v-if="isRecipesListEmpty">
       {{ this.not_found_message }}
@@ -74,9 +70,21 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.container {
-  min-height: 400px;
+<style scoped>
+
+
+.container{
+  display: flex;
+  justify-content: center;
+}
+.recipes-row {
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 100%;
 }
 
+.recipePreview {
+  width: 330px;
+  margin: 20px;
+}
 </style>

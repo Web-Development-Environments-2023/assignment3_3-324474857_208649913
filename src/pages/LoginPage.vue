@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <div class="wrapper">
     <h1 class="title">Login</h1>
     <b-form @submit.prevent="onLogin">
       <b-form-group
@@ -38,12 +39,12 @@
 
       <b-button
         type="submit"
-        variant="primary"
+        variant="success"
         style="width:100px;display:block;"
         class="mx-auto w-100"
         >Login</b-button
       >
-      <div class="mt-2">
+      <div class="mt-2 text-center">
         Do not have an account yet?
         <router-link to="register"> Register in here</router-link>
       </div>
@@ -57,10 +58,8 @@
     >
       Login failed: {{ form.submitError }}
     </b-alert>
-    <!-- <b-card class="mt-3" header="Form Data Result">
-      <pre class="m-0">{{ form }}</pre>
-    </b-card> -->
   </div>
+</div>
 </template>
 
 <script>
@@ -125,6 +124,18 @@ export default {
 </script>
 <style lang="scss" scoped>
 .container {
-  max-width: 400px;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+  width: 500px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 15px #0000003a;
 }
 </style>
