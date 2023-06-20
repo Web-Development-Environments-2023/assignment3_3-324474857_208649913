@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="title">Family Recipes Page</h1>
+    <h1 class="text-center pt-5 pb-5" id="title">Family Recipes Page</h1>
     <FamilyRecipeList title="Family Recipes" server_url="/users/family-recipes" 
     notFound_msg="This user has not added family recipes" class="RandomRecipes center" />
   </div>
@@ -26,5 +26,10 @@ export default {
 ::v-deep .blur .recipe-preview {
   pointer-events: none;
   cursor: default;
+}
+
+#title {
+  color: rgb(91, 184, 91);
+  font-size: 35px;
 }
 </style>

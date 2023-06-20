@@ -1,16 +1,12 @@
 <template>
-  <b-container>
-    <h3>
-      {{ title }}:
-      <slot></slot>
-    </h3>
-    <b-row v-if="recipes.length > 0 ">
-      <b-col v-for="r in recipes" :key="r.id">
+  <div class="conteinter">
+    <div class="center" v-if="recipes.length > 0 ">
+      <b-row  v-for="r in recipes" :key="r.id">
         <FamilyRecipe class="" :recipe="r" />
-      </b-col>
-    </b-row>
+      </b-row>
+    </div>
     <p v-else><b> No family recipes found for this user.</b></p>
-  </b-container>
+  </div>
 </template>
 
 <script>
@@ -63,5 +59,10 @@ export default {
 <style lang="scss" scoped>
 .container {
   min-height: 400px;
+}
+
+.data{
+  display: flex;
+  flex-direction: row;
 }
 </style>
