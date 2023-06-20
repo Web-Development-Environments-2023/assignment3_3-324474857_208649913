@@ -73,7 +73,7 @@ export default {
         this.$router.replace("/NotFound");
         return;
       }
-      let my = this.$route.params.myRecipe;
+      let isMyRecipe = this.$route.params.myRecipe;
       let {
         instructions,
         extendedIngredients,
@@ -86,7 +86,7 @@ export default {
         glutenFree,
         servings,
         ingredients
-      } = my === 'true' ? this.$route.params.recipe :response.data
+      } = isMyRecipe === 'true' ? this.$route.params.recipe :response.data
 
       let _recipe = {
         instructions,
@@ -103,7 +103,7 @@ export default {
       };
 
       this.recipe = _recipe;
-      if (my === undefined)
+      if (isMyRecipe === undefined)
         this.markAsWatched(this.$route.params.recipeId);
     } catch (error) {
       console.log(error);
@@ -112,8 +112,8 @@ export default {
   methods: {
     async markAsWatched(recipeId){
       try{
-        if($root.store.username){
-          const response = await this.axios.post( this.$root.store.server_domain + '/recipes/watched', {recipeId:recipeId},
+        if(this.$root.store.username){
+          const response = await this.axios.post( this.$root.store.server_domain + '/recipes/watched', {recipe_id:recipeId},
           { withCredentials: true }
           );
         }
