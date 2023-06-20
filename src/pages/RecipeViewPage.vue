@@ -5,25 +5,58 @@
         <img :src="recipe.image" class="recipe_img center" />
         <div class="header_info">
           <h1 class="text-center mb-3">{{ recipe.title }}</h1>
-        <div class="d-flex cente justify-content-center">
-          <i v-if="$root.store.username && recipe.watched" class="bi bi-eye-fill ml-1 mr-1" style="font-size:20px"></i>
-          <FavoriteStar class="ml-1 mr-1" v-if="$root.store.username && recipe.watched !== undefined" :favorited="recipe.favorite"
-            :recipeId="recipe.id"></FavoriteStar>
-          <img class="ml-1 mr-1" v-if="recipe.vegan" :src="vegan" alt="Vegan Icon" width="50px" height="30px" />
-          <img class="ml-1 mr-1" v-if="recipe.vegetarian" :src="vegetarian" alt="Vegan Icon" width="35px" height="35px" />
-          <img class="ml-1 mr-1" v-if="recipe.glutenFree" :src="glutenFree" alt="glutenFree Icon" width="30px"
-            height="30px" />
+          <div class="d-flex cente justify-content-center">
+            <i
+              v-if="$root.store.username && recipe.watched"
+              class="bi bi-eye-fill ml-1 mr-1"
+              style="font-size:20px"
+            ></i>
+            <FavoriteStar
+              class="ml-1 mr-1"
+              v-if="$root.store.username && recipe.watched !== undefined"
+              :favorited="recipe.favorite"
+              :recipeId="recipe.id"
+            ></FavoriteStar>
+            <img
+              class="ml-1 mr-1"
+              v-if="recipe.vegan"
+              :src="vegan"
+              alt="Vegan Icon"
+              width="50px"
+              height="30px"
+            />
+            <img
+              class="ml-1 mr-1"
+              v-if="recipe.vegetarian"
+              :src="vegetarian"
+              alt="Vegan Icon"
+              width="35px"
+              height="35px"
+            />
+            <img
+              class="ml-1 mr-1"
+              v-if="recipe.glutenFree"
+              :src="glutenFree"
+              alt="glutenFree Icon"
+              width="30px"
+              height="30px"
+            />
+          </div>
+
+          <span class="mt-2"
+            ><i class="bi bi-clock mr-2"></i> <b>Ready in:</b>
+            {{ recipe.readyInMinutes }} minutes</span
+          >
+          <span class="mt-2" v-if="this.$route.params.myRecipe !== 'true'"
+            ><i class="bi bi-hand-thumbs-up mr-2"></i> <b>Likes:</b>
+            {{ recipe.popularity }} likes
+          </span>
+          <span class="mt-2"
+            ><i class="bi bi-person mr-2"></i><b>Serving:</b>
+            {{ recipe.servings }}</span
+          >
         </div>
-
-        <span class="mt-2"><i class="bi bi-clock mr-2"></i>
-<b>Ready in:</b> {{ recipe.readyInMinutes }} minutes</span>
-        <span class="mt-2" v-if="this.$route.params.myRecipe !== 'true'"><i class="bi bi-hand-thumbs-up mr-2"></i>
-          <b>Likes:</b> {{ recipe.popularity }} likes
-        </span>
-        <span class="mt-2"><i class="bi bi-person mr-2"></i><b>Serving:</b> {{ recipe.servings }}</span>
       </div>
-    </div>
-
 
       <div class="recipe-body">
         <div class="wrapper">
@@ -31,7 +64,10 @@
             <div class="mb-3"></div>
             <b>Ingredients:</b>
             <ul v-if="this.$route.params.myRecipe !== 'true'">
-              <li v-for="(r, index) in recipe.extendedIngredients" :key="index + '_' + r.id">
+              <li
+                v-for="(r, index) in recipe.extendedIngredients"
+                :key="index + '_' + r.id"
+              >
                 {{ r.original }}
               </li>
             </ul>
@@ -168,9 +204,7 @@ export default {
   border-radius: 30px;
 }
 
-
-
-.header_info{
+.header_info {
   display: flex;
   flex-direction: column;
   background-color: #a1b65628;
@@ -180,7 +214,7 @@ export default {
   border-radius: 20px;
 }
 
-.recipe-body{
+.recipe-body {
   background-color: #a1b65628;
   padding: 20px;
   border-radius: 20px;
@@ -190,11 +224,10 @@ export default {
   font-size: 25px;
 }
 
-.recipe_img{
+.recipe_img {
   border: 5px solid #a1b65658;
   border-radius: 20px;
   width: 40%;
   height: 300px;
-
 }
 </style>
