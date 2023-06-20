@@ -59,24 +59,8 @@ export default {
       vegan: require('@/assets/vegan_icon.png'),
       vegetarian: require('@/assets/vegetarian_icon.png'),
       glutenFree: require('@/assets/gluten_free_icon.png'),
-      // marked:false
     };
   },
-  // methods:{
-  //   async markAsFavorite(recipeId){
-  //     try{
-  //       const response = await this.axios.post( this.$root.store.server_domain + '/users/favorites', {recipeId:recipeId},
-  //         { withCredentials: true }
-  //       );
-  //       this.marked = true;
-
-  //     }
-  //     catch(error){
-  //       console.log(error);
-  //     }
-      
-  //   }
-  // },
   props: {
     recipe: {
       type: Object,
@@ -190,10 +174,4 @@ export default {
   height: 100%;
   display: flex;
 }
-
-.data_wrapper{
-}
-
-
-
 </style>

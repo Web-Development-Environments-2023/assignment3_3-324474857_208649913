@@ -1,5 +1,5 @@
--Create My Recipe Button 
--Favorite star on previewRecipe fix
+-Favorite star on previewRecipe fix: added to my favs but doesnt appear as full star
+- watched POST request on RecipePage open 
  
 
 Search: 
@@ -7,14 +7,8 @@ Search:
 
 
 * Recipe Preview Requirements:
-    - watched indication 
-    - favorites indication
+    - watched indication fix 
+    - favorites indication bug
     - design the image to be evidently clickable 
 
 - 3 Recipes for family recipes
-
-Questions:
-* What is marked variable on RecipePreview.vue (not used ?)
-
-Check if working:
-- watched POST request on RecipePage open 
