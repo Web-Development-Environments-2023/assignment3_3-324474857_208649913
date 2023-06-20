@@ -24,16 +24,15 @@
 
       <div class="data_wrapper">
       <div class="data">
-        <i v-if="recipe.watched" class="bi bi-eye-fill " style="font-size:20px" ></i>
-        <FavoriteStar v-if="$root.store.username" :recipeId="recipe.id" :favorited="recipe.favorite"/>
-        <img v-if="recipe.vegan" :src="vegan" alt="Vegan Icon" width="50px" height="30px" />
-        <img v-if="recipe.vegetarian" :src="vegetarian" alt="Vegan Icon" width="35px" height="35px" />
-        <img v-if="recipe.glutenFree" :src="glutenFree" alt="glutenFree Icon" width="30px" height="30px" />
+        <i v-if="recipe.watched" class="bi bi-eye-fill ml-1 mr-1" style="font-size:20px" ></i>
+        <FavoriteStar class="ml-1 mr-1" v-if="$root.store.username" :recipeId="recipe.id" :favorited="recipe.favorite"/>
+        <img class="ml-1 mr-1" v-if="recipe.vegan" :src="vegan" alt="Vegan Icon" width="50px" height="30px" />
+        <img class="ml-1 mr-1" v-if="recipe.vegetarian" :src="vegetarian" alt="Vegan Icon" width="35px" height="35px" />
+        <img class="ml-1 mr-1" v-if="recipe.glutenFree" :src="glutenFree" alt="glutenFree Icon" width="30px" height="30px" />
       </div>
       <router-link
-        :to="{ name: 'recipe', params: { recipeId: recipe.id, recipe:recipe, myRecipe:myRecipe } }"
-        class="recipe-preview"
-      >
+        :to="{ name: 'recipe', params: { recipeId: recipe.id, recipe:recipe, myRecipe:myRecipe }}"
+        class="recipe-preview">
         <div class="buttonWrapper">
         <b-button  id="watchBtn" variant="warning">Watch full recipe</b-button>
       </div>

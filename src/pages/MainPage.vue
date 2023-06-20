@@ -6,7 +6,9 @@
       <b-button @click="moreRandomRecipes" variant="primary">More Recipes</b-button>
     </div>
     <div class="bottom">
-      <RecipePreviewList v-if="$root.store.username"
+      <div v-if="$root.store.username">
+        <h1 id="last_watched" class="text-center">Last Watched</h1>
+      <RecipePreviewList
         title="Last Viewed Recipes"
         server_url="/recipes/watched"
         :class="{
@@ -14,7 +16,7 @@
           center: true
         }"
         disabled
-      ></RecipePreviewList>
+      ></RecipePreviewList></div>
       <div v-else>
         <LoginPage class="login_page"></LoginPage>
       </div>
@@ -75,6 +77,10 @@ export default {
 
 .login_page{
   height: 300px;
+}
+
+#last_watched{
+  color: rgba(0, 0, 0, 0.278);
 }
 
 </style>

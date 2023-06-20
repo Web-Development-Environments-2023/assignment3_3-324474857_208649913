@@ -17,7 +17,7 @@ export default {
     async markAsFavorite(recipeId){
       try{
         // Send request only if the user is logged in
-        if ($root.store.username){
+        if (this.$root.store.username){
           const response = await this.axios.post( this.$root.store.server_domain + '/users/favorites', {recipeId:recipeId},
           { withCredentials: true }
           );
