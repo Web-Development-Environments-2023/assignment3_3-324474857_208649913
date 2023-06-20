@@ -9,7 +9,7 @@
           <i v-if="$root.store.username && recipe.watched" class="bi bi-eye-fill ml-1 mr-1" style="font-size:20px"></i>
           <FavoriteStar class="ml-1 mr-1" v-if="$root.store.username && recipe.watched !== undefined" :favorited="recipe.favorite"
             :recipeId="recipe.id"></FavoriteStar>
-          <img class="ml-1 mr-1" v-if="recipe.vegan" :src="vegan" alt="Vegan Icon" width="30px" height="30px" />
+          <img class="ml-1 mr-1" v-if="recipe.vegan" :src="vegan" alt="Vegan Icon" width="50px" height="30px" />
           <img class="ml-1 mr-1" v-if="recipe.vegetarian" :src="vegetarian" alt="Vegan Icon" width="35px" height="35px" />
           <img class="ml-1 mr-1" v-if="recipe.glutenFree" :src="glutenFree" alt="glutenFree Icon" width="30px"
             height="30px" />
