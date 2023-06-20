@@ -16,31 +16,6 @@
       </b-form-select>
     </div> 
   </div>
-  <div v-if="showLastWatched()" class="last_search_section">
-    <div class="last_search_params search_section">
-      <h3 style="color: rgba(0, 0, 0, 0.60);">Last Search</h3>
-      <label for="query">Query:</label>
-      <span id="query">{{ last_search_params.query }}</span>
-      <br/>
-      <label for="number">Number:</label>
-      <span id="number">{{ last_search_params.number }}</span>
-      <br/>
-      <label for="cuisine">Cuisine:</label>
-      <span id="cuisine">{{ last_search_params.cuisine }}</span>
-      <br/>
-      <label for="diet">Diet:</label>
-      <span id="diet">{{ last_search_params.diet }}</span>
-      <br/>
-      <label for="intolerances">Intolerances:</label>
-      <span id="intolerances">{{ last_search_params.intolerances }}</span>
-      <br/>
-      <b-button @click="editLastSearch" size="sm" class="my-2 my-sm-3 w-75 " variant="warning">Edit Search</b-button>
-      <!-- <b-button @click="searchAgain" size="sm" class="my-2 my-sm-3 w-75 " variant="warning">Search Again</b-button> -->
-    </div>
-    <div class="last_search_results">
-      <h3>Last Search Results</h3>
-    </div>
-  </div>
   <div class="results_wrapper">
     <h2 id="title" class="text-center mt-5 mb-2">Search</h2>
     <div class="sorting_buttons" v-if="showResults">
@@ -61,8 +36,26 @@
   <div v-if="showNoResultsMsg" class="no_results_section text-center mt-5">
     <h3> No recipes found...</h3>
   </div>
+
+  <div v-if="showLastWatched()" class="last_search_section">
+    <div class="">
+      <h3 style="color: rgba(0, 0, 0, 0.60);">Last Search</h3>
+      <span v-if="last_search_params.query" class="mr-2 ml-1" ><b>Recipe name:</b>
+      {{ last_search_params.query }} |</span>
+      <span  v-if="last_search_params.cuisine" class="mr-2 ml-1"><b>Cuisine:</b>
+      {{ last_search_params.cuisine }} |</span>
+      <span  v-if="last_search_params.diet" class="mr-2 ml-1"><b>Diet:</b>
+      {{ last_search_params.diet }} |</span>
+      <span  v-if="last_search_params.intolerances" class="mr-2 ml-1"><b for="intolerances">Intolerances:</b>
+      {{ last_search_params.intolerances }} |</span>
+      <b-button @click="editLastSearch" size="sm" class="my-2 my-sm-3" variant="secondary">Edit Search</b-button>
+    </div>
+    <div class="last_search_results">
+      <h3>Last Search Results</h3>
+      
+    </div>
+  </div>
 </div>
-  
 </div>
 </template>
 
@@ -75,6 +68,8 @@ import 'vue-select/dist/vue-select.css';
 export default {
   data() {
     return {
+      slide: 1,
+      sliding: null,
       currentSortBy: '',
       sortOrderPopularity: false, //True - ascending, False - descending
       sortOrderPreparation: true, //True - ascending, False - descending
@@ -145,15 +140,11 @@ export default {
       recipes:[],
       last_search_params: this.$root.store.last_search_params,
       last_search_results: this.$root.store.last_search_results,
-      // For sort buttons testing
-    //   recipes: [
-    //     {id:1, popularity:5, readyInMinutes:10},
-    //     {id:2, popularity:3, readyInMinutes:12},
-    //     {id:3, popularity:7, readyInMinutes:8},
-    // ],
+
     };
   },
   methods: {
+    
     async searchRecipes() {
       try {
         const params = {
@@ -169,15 +160,6 @@ export default {
         const response = await axios.get(`${this.$root.store.server_domain}/recipes/search`, { params });
         this.recipes = response.data;
         this.last_search_results = this.recipes;
-// For testing comment 2 lines above, and uncomment one of the lines below
-        // this.recipes= [
-        // {id:1, popularity:5, readyInMinutes:10},
-        // {id:2, popularity:3, readyInMinutes:12},
-        // {id:3, popularity:7, readyInMinutes:8},
-        // ];
-
-        // this.recipes = [];
-
         if(this.recipes.length === 0){
           this.showNoResultsMsg = true;
           this.showResults = false;
@@ -191,27 +173,7 @@ export default {
         console.log(error);
       }
     },
-    // async searchAgain(){
-    //   try
-    //   {
-    //     const params = this.query;
-    //     const response = await axios.get(`${this.$root.store.server_domain}/recipes/search`, { params });
-    //     this.recipes = response.data;
-    //     if(this.recipes.length === 0){
-    //       this.showNoResultsMsg = true;
-    //       this.showResults = false;
-    //     }
-    //     else{
-    //       this.showNoResultsMsg = false;
-    //       this.showResults = true;
-    //     }
-    //     console.log(this.recipes);
-    //   } 
-    //   catch (error) {
-    //     console.log(error);
-    //   }
 
-    // },
     editLastSearch(){
       const last_search = this.last_search_params
       this.searchQuery = last_search.query;
@@ -221,16 +183,11 @@ export default {
       this.selectedIntolerances = last_search.intolerances.split(',');
     },
     showLastWatched(){
-        console.log("showLastWatched")
-        console.log(this.last_search_params);
-        console.log(!this.showResults);
         // if(this.last_search_params && !this.showResults){
         if(this.last_search_params){  
-          console.log("got to true")
           return true
         }
         else{
-          console.log("got to false")
           return false
         }
     },
@@ -272,7 +229,7 @@ export default {
   },
   components: {
     RecipePreview,
-    VueSelect
+    VueSelect,
   }
 };
 </script>
@@ -291,7 +248,7 @@ export default {
   display: flex;
   flex-direction: column;
   background-color: rgba(237, 240, 237, 0.797);
-  width: 250px;
+  width: 300px;
   height: 100vh;
   padding: 15px;
   padding-top: 40px;
@@ -321,5 +278,16 @@ export default {
 #title {
   color: rgb(91, 184, 91);
   font-size: 35px;
+}
+
+.last_search_section{
+  background-color: rgba(0, 0, 0, 0.095);
+  margin-top: auto;
+  padding: 20px;
+  border: 3px dashed #00000037;
+  border-radius: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
 }
 </style>
