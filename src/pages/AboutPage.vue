@@ -146,6 +146,7 @@ export default {
   padding-top: 20px;
   box-shadow: 0px 0px 15px #0000001d;
   height: 100%;
+  border: 4px dashed #0000001b;
 
 }
 
@@ -162,6 +163,8 @@ export default {
   padding: 15px;
   width: 80%;
   margin: auto;
+  border: 4px dashed #0000001b;
+
 
 }
 </style>
