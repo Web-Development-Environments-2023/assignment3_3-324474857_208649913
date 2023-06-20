@@ -8,14 +8,38 @@
     <span>Diets:</span><vue-select class="mb-3" v-model="selectedDiet" :options="dietary_list" multiple ></vue-select>
     <span>Intolerances:</span><vue-select class="mb-3" v-model="selectedIntolerances" :options="allergens_list" multiple ></vue-select>
     <div>
-    <b-button @click="searchRecipes" size="sm" class="my-2 my-sm-3 w-75 " variant="warning">Search</b-button>
-    <b-form-select size="sm" class="w-25" v-model="numResults">
-      <b-form-select-option value="5">5</b-form-select-option>
-      <b-form-select-option value="10">10</b-form-select-option>
-      <b-form-select-option value="15">15</b-form-select-option>
-    </b-form-select>
+      <b-button @click="searchRecipes" size="sm" class="my-2 my-sm-3 w-75 " variant="warning">Search</b-button>
+      <b-form-select size="sm" class="w-25" v-model="numResults">
+        <b-form-select-option value="5">5</b-form-select-option>
+        <b-form-select-option value="10">10</b-form-select-option>
+        <b-form-select-option value="15">15</b-form-select-option>
+      </b-form-select>
+    </div> 
   </div>
-    
+  <div v-if="showLastWatched()" class="last_search_section">
+    <div class="last_search_params search_section">
+      <h3 style="color: rgba(0, 0, 0, 0.60);">Last Search</h3>
+      <label for="query">Query:</label>
+      <span id="query">{{ last_search_params.query }}</span>
+      <br/>
+      <label for="number">Number:</label>
+      <span id="number">{{ last_search_params.number }}</span>
+      <br/>
+      <label for="cuisine">Cuisine:</label>
+      <span id="cuisine">{{ last_search_params.cuisine }}</span>
+      <br/>
+      <label for="diet">Diet:</label>
+      <span id="diet">{{ last_search_params.diet }}</span>
+      <br/>
+      <label for="intolerances">Intolerances:</label>
+      <span id="intolerances">{{ last_search_params.intolerances }}</span>
+      <br/>
+      <b-button @click="editLastSearch" size="sm" class="my-2 my-sm-3 w-75 " variant="warning">Edit Search</b-button>
+      <!-- <b-button @click="searchAgain" size="sm" class="my-2 my-sm-3 w-75 " variant="warning">Search Again</b-button> -->
+    </div>
+    <div class="last_search_results">
+      <h3>Last Search Results</h3>
+    </div>
   </div>
   <div class="results_wrapper">
     <h2 id="title" class="text-center mt-5 mb-2">Search</h2>
@@ -119,6 +143,8 @@ export default {
       showResults:false,
       showNoResultsMsg:false,
       recipes:[],
+      last_search_params: this.$root.store.last_search_params,
+      last_search_results: this.$root.store.last_search_results,
       // For sort buttons testing
     //   recipes: [
     //     {id:1, popularity:5, readyInMinutes:10},
@@ -132,13 +158,17 @@ export default {
       try {
         const params = {
           query: this.searchQuery,
-          number: this.numResults,
+          // TODO: comment before testing
+          number: this.numResults, 
+          // number: 1,
           cuisine: this.selectedCuisine.join(","),
           diet: this.selectedDiet.join(","),
           intolerances: this.selectedIntolerances.join(",")
         };
+        this.$root.store.last_search_params = params;
         const response = await axios.get(`${this.$root.store.server_domain}/recipes/search`, { params });
         this.recipes = response.data;
+        this.last_search_results = this.recipes;
 // For testing comment 2 lines above, and uncomment one of the lines below
         // this.recipes= [
         // {id:1, popularity:5, readyInMinutes:10},
@@ -160,6 +190,49 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    // async searchAgain(){
+    //   try
+    //   {
+    //     const params = this.query;
+    //     const response = await axios.get(`${this.$root.store.server_domain}/recipes/search`, { params });
+    //     this.recipes = response.data;
+    //     if(this.recipes.length === 0){
+    //       this.showNoResultsMsg = true;
+    //       this.showResults = false;
+    //     }
+    //     else{
+    //       this.showNoResultsMsg = false;
+    //       this.showResults = true;
+    //     }
+    //     console.log(this.recipes);
+    //   } 
+    //   catch (error) {
+    //     console.log(error);
+    //   }
+
+    // },
+    editLastSearch(){
+      const last_search = this.last_search_params
+      this.searchQuery = last_search.query;
+      this.numResults = last_search.number;
+      this.selectedCuisine = last_search.cuisine.split(',');
+      this.selectedDiet = last_search.diet.split(',');
+      this.selectedIntolerances = last_search.intolerances.split(',');
+    },
+    showLastWatched(){
+        console.log("showLastWatched")
+        console.log(this.last_search_params);
+        console.log(!this.showResults);
+        // if(this.last_search_params && !this.showResults){
+        if(this.last_search_params){  
+          console.log("got to true")
+          return true
+        }
+        else{
+          console.log("got to false")
+          return false
+        }
     },
     toggleSort(sortBy) {
 

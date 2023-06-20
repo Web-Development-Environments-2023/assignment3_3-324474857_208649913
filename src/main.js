@@ -74,16 +74,22 @@ const shared_data = {
   server_domain: "http://localhost:3000",
   // server_domain: "http://10.0.0.17:80",
   username: localStorage.username,
-  // TODO: add last searched recipes for users 
+  last_search_results: null,
+  last_search_params: null,
   login(username) {
     localStorage.setItem("username", username);
+    // localStorage.setItem("last_search", null);
     this.username = username;
+    // this.last_search = null;
     console.log("login", this.username);
   },
   logout() {
     console.log("logout");
     localStorage.removeItem("username");
+    // localStorage.removeItem("last_search");
     this.username = undefined;
+    this.last_search_results = undefined;
+    this.last_search_params = undefined;
   },
 };
 console.log(shared_data);

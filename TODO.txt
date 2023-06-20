@@ -1,14 +1,5 @@
--Favorite star on previewRecipe fix: added to my favs but doesnt appear as full star
-- watched POST request on RecipePage open 
- 
-
-Search: 
-    - Last search for a logged in user, None for not logged 
-
 
 * Recipe Preview Requirements:
-    - watched indication fix 
-    - favorites indication bug
     - design the image to be evidently clickable 
 
 - 3 Recipes for family recipes
