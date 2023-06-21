@@ -2,8 +2,11 @@
   <div class="container">
     <div class="random_section">
       <h1 id="title" class="mt-5 ">Main Page</h1>
+      <h2 id="title" class="mt-1">Explore recipes</h2>
+      <div class="random_recipes_wrapper">
       <RecipePreviewList ref="random_recipesList" title="Random Recipes" server_url="/recipes" class="RandomRecipes" />
-      <b-button @click="moreRandomRecipes" variant="primary">More Recipes</b-button>
+      <b-button class="more_btn" @click="moreRandomRecipes" variant="success">More Recipes</b-button>
+    </div>
     </div>
     <div class="bottom">
       <div v-if="$root.store.username">
@@ -81,6 +84,20 @@ export default {
 
 #last_watched{
   color: rgba(0, 0, 0, 0.278);
+}
+
+.random_recipes_wrapper{
+  background-color: #00000021;
+  border-radius: 20px;
+  border: 3px dashed #00000032;
+  width: fit-content;
+  display: flex;
+  // align-items: center;
+  flex-direction: column;
+}
+
+.more_btn{
+  border-radius: 20px;
 }
 
 </style>
