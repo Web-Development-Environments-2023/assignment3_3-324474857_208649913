@@ -88,7 +88,6 @@ export default {
 }
 
 .recipePreview {
-  width: 330px;
   margin: 20px;
 }
 </style>

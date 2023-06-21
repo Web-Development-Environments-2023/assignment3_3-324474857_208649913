@@ -1,26 +1,21 @@
 <template>
 
   <div>
-    <!-- <b-card
-      v-if="image_load"
-      :title="recipe.title"
-      :img-src="recipe.image"
-      img-alt="Image"
-      img-top
-      tag="article"
-      style="max-width: 20rem;"
-      class="mb-2"
-    > -->
-    <b-card
-      :title="recipe.title"
-      img-alt="Image"
-      img-top
-      tag="article"
-      style="max-width: 20rem;"
-      class="mb-2"
-    >
+
+        <b-card
+        tag="article"
+        style="max-width: 20rem;"
+        class="mb-2"
+        >
+        <h2 class="text-center" style="font-size: 25px">{{ recipe.title }}</h2>
+        <router-link
+        :to="{ name: 'recipe', params: { recipeId: recipe.id, recipe:recipe, myRecipe:myRecipe }}"
+        class="recipe-preview">
+        <div class="image_wrapper center" :style="`background-image: url(${recipe.image})`"></div>
+      </router-link>
       <b-card-text> <b>Ready in:</b> {{ recipe.readyInMinutes }} minutes </b-card-text>
       <b-card-text v-if="recipe.popularity>0"> <b>Popularity:</b> {{ recipe.popularity }} likes </b-card-text>
+      <b-card-text v-if="recipe.servings>0"> <b>Servings:</b> {{ recipe.servings }} </b-card-text>
 
       <div class="data_wrapper">
       <div class="data">
@@ -46,15 +41,8 @@
 import FavoriteStar from './FavoriteStar.vue';
 
 export default {
-
-  mounted() {
-    this.axios.get(this.recipe.image).then((i) => {
-      this.image_load = true;
-    });
-  },
   data() {
     return {
-      image_load: false,
       vegan: require('@/assets/vegan_icon.png'),
       vegetarian: require('@/assets/vegetarian_icon.png'),
       glutenFree: require('@/assets/gluten_free_icon.png'),
@@ -169,8 +157,23 @@ export default {
 
 .card{
   border-radius: 20px;
-  box-shadow: 0px 0px 20px  #0000000f;
   height: 100%;
   display: flex;
+  background-color: rgb(255, 255, 255);
+}
+
+.image_wrapper{
+  width:260px;
+  height: 200px;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  transition: .2s ease-in-out;
+}
+
+.image_wrapper:hover{
+  transform: scale(1.05);
+  box-shadow: 0px 0px 20px  #0000003d;
+
 }
 </style>

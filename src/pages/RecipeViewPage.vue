@@ -2,7 +2,7 @@
   <div class="container">
     <div class="containter_info" v-if="recipe">
       <div class="recipe-header mt-3 mb-4 d-flex">
-        <img :src="recipe.image" class="recipe_img center" />
+        <div class="image_wrapper center" :style="`background-image: url(${recipe.image})`"></div>
         <div class="header_info">
           <h1 class="text-center mb-3">{{ recipe.title }}</h1>
           <div class="d-flex cente justify-content-center">
@@ -225,9 +225,15 @@ export default {
 }
 
 .recipe_img {
-  border: 5px solid #a1b65658;
-  border-radius: 20px;
+}
+.image_wrapper{
   width: 40%;
   height: 300px;
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
+  transition: .2s ease-in-out;
+  border: 5px solid #a1b65658;
 }
+
 </style>
