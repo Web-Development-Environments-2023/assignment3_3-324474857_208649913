@@ -71,9 +71,7 @@
                 {{ r.original }}
               </li>
             </ul>
-            <p v-if="this.$route.params.myRecipe === 'true'">
-              {{ recipe.ingredients }}
-            </p>
+            <div v-if="this.$route.params.myRecipe === 'true'" v-html="recipe.ingredients"></div>
           </div>
           <div class="wrapped">
             <b>Instructions</b>

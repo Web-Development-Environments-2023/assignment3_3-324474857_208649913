@@ -65,7 +65,7 @@
             ></b-form-input>
           </b-form-group>
           <b-form-group
-            label="Ingredients"
+            label="Ingredients (separated by ;)"
             label-for="ingredients-input"
             invalid-feedback="ingredients is required"
             :state="ingredientsState"
@@ -78,7 +78,7 @@
             ></b-form-input>
           </b-form-group>
           <b-form-group
-            label="Instructions"
+            label="Instructions (separated by ;)"
             label-for="instructions-input"
             invalid-feedback="Instructions is required"
             :state="instructionsState"
@@ -103,13 +103,17 @@
           </div>
         </form>
       </b-modal>
-      <div :key="render">
-        <RecipePreviewList
-          title="My Recipes"
-          server_url="/users/my-recipes"
-          class="my recipes center"
-          myRecipe="true"
-        />
+      <div>
+        <b-container class="container">
+          <b-row>
+            <div class="recipes_container" v-for="r in this.recipes" :key="r.id">
+              <RecipePreview class="recipePreview" :recipe="r" :myRecipe="'true'" />
+            </div>
+          </b-row>
+          <div v-if="isRecipesListEmpty">
+            <span>No recipes added yet</span>
+          </div>
+        </b-container>
       </div>
     </div>
   </div>
@@ -118,10 +122,12 @@
 <script>
 import { BModal } from "bootstrap-vue";
 import RecipePreviewList from "../components/RecipePreviewList.vue";
+import RecipePreview from "../components/RecipePreview.vue";
 
 export default {
   data() {
     return {
+      recipes: [],
       render: 0,
       title: "",
       image: "",
@@ -140,9 +146,23 @@ export default {
       ingredientsState: null,
     };
   },
+  mounted() {
+    this.updateRecipes();
+  },
   methods: {
-    reRender() {
-      this.render += 1;
+    async updateRecipes() {
+      try {
+        const response = await this.axios.get(
+          this.$root.store.server_domain + "/users/my-recipes",
+          { withCredentials: true }
+        );
+        console.log(response);
+        const recipes = response.data;
+        this.recipes = [];
+        this.recipes.push(...recipes);
+      } catch (error) {
+        console.log(error);
+      }
     },
     showModal() {
       this.$root.$emit("bv::show::modal", "modal-prevent-closing");
@@ -180,6 +200,9 @@ export default {
         return false;
       }
       try {
+        this.parseMyRecipeParams();
+        console.log(this.ingredients);
+        console.log(this.instructions);
         const response = await this.axios.post(
           this.$root.store.server_domain + "/users/my-recipes",
           {
@@ -215,13 +238,27 @@ export default {
         // Hide the modal manually
         this.$refs.modal.hide();
       });
-      reRender();
+      // Refresh page
+      location.reload();
+    },
+    parseMyRecipeParams(){
+      let ings = this.ingredients.split(";").map(item => `<li>${item}</li>`);
+      let instructs = this.instructions.split(";").map(item => `<li>${item}</li>`);
+      ings = `<ul>${ings.join("")}</ul>`;
+      instructs = `<ol>${instructs.join("")}</ol>`;
+      this.ingredients = ings;
+      this.instructions = instructs;
     },
   },
   components: {
     BModal,
-    RecipePreviewList,
+    RecipePreview
   },
+  computed:{
+    isRecipesListEmpty(){
+      return this.recipes.length === 0;
+    }
+  }
 };
 </script>
 
