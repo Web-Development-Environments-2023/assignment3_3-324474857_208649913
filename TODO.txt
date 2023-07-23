@@ -1,5 +1,0 @@
-
-* Recipe Preview Requirements:
-    - design the image to be evidently clickable 
-
-- 3 Recipes for family recipes
